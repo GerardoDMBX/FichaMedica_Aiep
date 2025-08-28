@@ -1,126 +1,146 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario Ficha Médica</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .error {
-      color: red;
-      font-size: 0.9em;
-      display: none;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ficha Médica - Demo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-light">
 
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Ficha Médica</h2>
-    <form id="fichaForm" class="p-4 bg-white shadow rounded">
-      <div class="row g-3">
-        
-        <div class="col-md-6">
-          <label for="rut" class="form-label">RUT *</label>
-          <input type="text" class="form-control" id="rut" required>
-          <div id="errorRut" class="error">El RUT solo debe contener números.</div>
-        </div>
+  <div class="container py-5">
+    <h1 class="text-center mb-3">Ficha Médica</h1>
+    <p class="text-center text-muted mb-4">Formulario de prueba — todos los campos marcados con * son obligatorios.</p>
 
-        <div class="col-md-6">
-          <label for="nombres" class="form-label">Nombres *</label>
-          <input type="text" class="form-control" id="nombres" required>
-        </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <form id="fichaForm" class="card p-4 shadow-sm needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="rut" class="form-label">RUT *</label>
+              <input id="rut" name="rut" type="text" inputmode="numeric" pattern="^[0-9]+$"
+                     class="form-control" required aria-describedby="rutHelp">
+              <div id="rutHelp" class="form-text">Ingresar solo números (sin puntos ni guion).</div>
+              <div class="invalid-feedback">El RUT es obligatorio y debe contener solo números.</div>
+            </div>
 
-        <div class="col-md-6">
-          <label for="apellidos" class="form-label">Apellidos *</label>
-          <input type="text" class="form-control" id="apellidos" required>
-        </div>
+            <div class="col-md-6">
+              <label for="nombres" class="form-label">Nombres *</label>
+              <input id="nombres" name="nombres" type="text" class="form-control" required>
+              <div class="invalid-feedback">Ingrese los nombres.</div>
+            </div>
 
-        <div class="col-md-6">
-          <label for="direccion" class="form-label">Dirección *</label>
-          <input type="text" class="form-control" id="direccion" required>
-        </div>
+            <div class="col-md-6">
+              <label for="apellidos" class="form-label">Apellidos *</label>
+              <input id="apellidos" name="apellidos" type="text" class="form-control" required>
+              <div class="invalid-feedback">Ingrese los apellidos.</div>
+            </div>
 
-        <div class="col-md-4">
-          <label for="ciudad" class="form-label">Ciudad *</label>
-          <input type="text" class="form-control" id="ciudad" required>
-        </div>
+            <div class="col-md-6">
+              <label for="direccion" class="form-label">Dirección *</label>
+              <input id="direccion" name="direccion" type="text" class="form-control" required>
+              <div class="invalid-feedback">Ingrese la dirección.</div>
+            </div>
 
-        <div class="col-md-4">
-          <label for="pais" class="form-label">País *</label>
-          <input type="text" class="form-control" id="pais" required>
-        </div>
+            <div class="col-md-4">
+              <label for="ciudad" class="form-label">Ciudad *</label>
+              <input id="ciudad" name="ciudad" type="text" class="form-control" required>
+              <div class="invalid-feedback">Ingrese la ciudad.</div>
+            </div>
 
-        <div class="col-md-4">
-          <label for="telefono" class="form-label">Teléfono *</label>
-          <input type="text" class="form-control" id="telefono" required>
-          <div id="errorTelefono" class="error">El teléfono solo debe contener números.</div>
-        </div>
+            <div class="col-md-4">
+              <label for="pais" class="form-label">País *</label>
+              <select id="pais" name="pais" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <option selected>Chile</option>
+                <option>Argentina</option>
+                <option>Perú</option>
+                <option>Bolivia</option>
+                <option>Otro</option>
+              </select>
+              <div class="invalid-feedback">Seleccione el país.</div>
+            </div>
 
-        <div class="col-md-6">
-          <label for="correo" class="form-label">Correo Electrónico *</label>
-          <input type="email" class="form-control" id="correo" required>
-        </div>
+            <div class="col-md-4">
+              <label for="telefono" class="form-label">Teléfono *</label>
+              <input id="telefono" name="telefono" type="tel" inputmode="numeric" pattern="^[0-9]+$"
+                     class="form-control" required aria-describedby="telHelp">
+              <div id="telHelp" class="form-text">Solo números (sin espacios ni signos).</div>
+              <div class="invalid-feedback">El teléfono es obligatorio y debe contener solo números.</div>
+            </div>
 
-        <div class="col-md-6">
-          <label for="fecha" class="form-label">Fecha de Nacimiento *</label>
-          <input type="date" class="form-control" id="fecha" required>
-        </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email *</label>
+              <input id="email" name="email" type="email" class="form-control" required>
+              <div class="invalid-feedback">Ingrese un email válido.</div>
+            </div>
 
-        <div class="col-md-6">
-          <label for="estado" class="form-label">Estado Civil *</label>
-          <select class="form-select" id="estado" required>
-            <option value="">Seleccione...</option>
-            <option>Soltero(a)</option>
-            <option>Casado(a)</option>
-            <option>Viudo(a)</option>
-            <option>Divorciado(a)</option>
-          </select>
-        </div>
+            <div class="col-md-6">
+              <label for="fechaNac" class="form-label">Fecha de Nacimiento *</label>
+              <input id="fechaNac" name="fechaNac" type="date" class="form-control" required>
+              <div class="invalid-feedback">Seleccione la fecha de nacimiento.</div>
+            </div>
 
-        <div class="col-md-12">
-          <label for="comentarios" class="form-label">Comentarios</label>
-          <textarea class="form-control" id="comentarios" rows="3"></textarea>
-        </div>
+            <div class="col-md-6">
+              <label for="estadoCivil" class="form-label">Estado Civil *</label>
+              <select id="estadoCivil" name="estadoCivil" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <option>Soltero(a)</option>
+                <option>Casado(a)</option>
+                <option>Divorciado(a)</option>
+                <option>Viudo(a)</option>
+              </select>
+              <div class="invalid-feedback">Seleccione el estado civil.</div>
+            </div>
+
+            <div class="col-12">
+              <label for="comentarios" class="form-label">Comentarios</label>
+              <textarea id="comentarios" name="comentarios" class="form-control" rows="3" required></textarea>
+              <div class="invalid-feedback">Ingrese un comentario.</div>
+            </div>
+          </div>
+
+          <!-- botones centrados -->
+          <div class="text-center mt-4">
+            <button id="btnGuardar" type="submit" class="btn btn-success me-2">Guardar</button>
+            <button id="btnLimpiar" type="button" class="btn btn-warning me-2">Limpiar</button>
+            <button id="btnCerrar" type="button" class="btn btn-secondary">Cerrar</button>
+          </div>
+        </form>
       </div>
 
-      <!-- Botones centrados -->
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-success me-2">Guardar</button>
-        <button type="reset" class="btn btn-warning me-2">Limpiar</button>
-        <button type="button" class="btn btn-danger" onclick="window.close()">Cerrar</button>
+      <div class="col-lg-4">
+        <div class="card p-3 shadow-sm mb-3">
+          <h5 class="mb-3">Buscar por Apellido</h5>
+          <div class="input-group mb-2">
+            <input id="buscarApellido" type="text" class="form-control" placeholder="Ingrese apellido">
+            <button id="btnBuscar" class="btn btn-primary" type="button">Buscar</button>
+          </div>
+          <small class="text-muted">Haz clic en un resultado para cargarlo en el formulario.</small>
+          <ul id="listaResultados" class="list-group mt-3" aria-live="polite"></ul>
+        </div>
+
+        <div class="card p-3 shadow-sm">
+          <h6>Datos de prueba</h6>
+          <p class="small text-muted mb-0">Puedes usar estos RUTs (solo números) para pruebas.</p>
+          <ul class="small mt-2">
+            <li>12345678</li>
+            <li>98765432</li>
+            <li>11122233</li>
+          </ul>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Validaciones JS -->
-  <script>
-    const rutInput = document.getElementById('rut');
-    const telInput = document.getElementById('telefono');
-    const errorRut = document.getElementById('errorRut');
-    const errorTel = document.getElementById('errorTelefono');
-
-    // Validar que solo se ingresen números en RUT
-    rutInput.addEventListener('input', function() {
-      if (/[^0-9]/.test(this.value)) {
-        errorRut.style.display = 'block';
-      } else {
-        errorRut.style.display = 'none';
-      }
-    });
-
-    // Validar que solo se ingresen números en Teléfono
-    telInput.addEventListener('input', function() {
-      if (/[^0-9]/.test(this.value)) {
-        errorTel.style.display = 'block';
-      } else {
-        errorTel.style.display = 'none';
-      }
-    });
-  </script>
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App JS -->
+  <script src="app.js" defer></script>
 </body>
 </html>
