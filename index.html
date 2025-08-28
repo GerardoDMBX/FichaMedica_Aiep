@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha Médica</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f3f3f3; }
+    h2 { text-align: center; }
+    form { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin: 10px 5px; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+    .guardar { background: #4caf50; color: #fff; }
+    .limpiar { background: #f44336; color: #fff; }
+    .cerrar { background: #555; color: #fff; }
+    .resultados { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Formulario Ficha Médica</h2>
+  <form id="fichaForm">
+    <label>RUT: <input type="text" id="rut" required></label>
+    <label>Nombres: <input type="text" id="nombres" required></label>
+    <label>Apellidos: <input type="text" id="apellidos" required></label>
+    <label>Dirección: <input type="text" id="direccion" required></label>
+    <label>Ciudad: <input type="text" id="ciudad" required></label>
+    <label>Teléfono: <input type="tel" id="telefono" required></label>
+    <label>Email: <input type="email" id="email" required></label>
+    <label>Fecha de Nacimiento: <input type="date" id="fechaNac" required></label>
+    <label>Estado Civil:
+      <select id="estadoCivil" required>
+        <option value="">Seleccione...</option>
+        <option>Soltero</option>
+        <option>Casado</option>
+        <option>Divorciado</option>
+        <option>Viudo</option>
+      </select>
+    </label>
+    <label>Comentarios:
+      <textarea id="comentarios"></textarea>
+    </label>
+    <button type="button" class="guardar" onclick="guardar()">Guardar</button>
+    <button type="reset" class="limpiar">Limpiar</button>
+    <button type="button" class="cerrar" onclick="cerrar()">Cerrar</button>
+  </form>
+
+  <div class="resultados">
+    <h3>Buscar por Apellido</h3>
+    <input type="text" id="buscarApellido" placeholder="Ingrese apellido">
+    <button onclick="buscar()">Buscar</button>
+    <ul id="listaResultados"></ul>
+  </div>
+
+  <script>
+    let registros = {};
+
+    function guardar() {
+      const rut = document.getElementById("rut").value;
+      const data = {
+        rut: rut,
+        nombres: document.getElementById("nombres").value,
+        apellidos: document.getElementById("apellidos").value,
+        direccion: document.getElementById("direccion").value,
+        ciudad: document.getElementById("ciudad").value,
+        telefono: document.getElementById("telefono").value,
+        email: document.getElementById("email").value,
+        fechaNac: document.getElementById("fechaNac").value,
+        estadoCivil: document.getElementById("estadoCivil").value,
+        comentarios: document.getElementById("comentarios").value
+      };
+
+      if (registros[rut]) {
+        if (confirm("El RUT ya existe, ¿desea sobrescribirlo?")) {
+          registros[rut] = data;
+          alert("Registro actualizado correctamente.");
+        }
+      } else {
+        registros[rut] = data;
+        alert("Registro guardado correctamente.");
+      }
+    }
+
+    function buscar() {
+      const apellido = document.getElementById("buscarApellido").value.toLowerCase();
+      const lista = document.getElementById("listaResultados");
+      lista.innerHTML = "";
+      for (let rut in registros) {
+        if (registros[rut].apellidos.toLowerCase().includes(apellido)) {
+          let li = document.createElement("li");
+          li.textContent = registros[rut].nombres + " " + registros[rut].apellidos + " (" + rut + ")";
+          lista.appendChild(li);
+        }
+      }
+    }
+
+    function cerrar() {
+      if (confirm("¿Desea cerrar la aplicación?")) {
+        window.close();
+      }
+    }
+  </script>
+</body>
+</html>
