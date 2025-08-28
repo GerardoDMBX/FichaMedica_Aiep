@@ -1,240 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ficha Médica</title>
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Ficha Médica</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+    }
+  </style>
 </head>
 <body class="bg-light">
-  <div class="container py-5">
-    <h2 class="text-center mb-1">Formulario Ficha Médica</h2>
-    <p class="text-center text-muted mb-4">Todos los campos son obligatorios.</p>
 
-    <form id="fichaForm" class="card shadow p-4 needs-validation" novalidate>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Ficha Médica</h2>
+    <form id="fichaForm" class="p-4 bg-white shadow rounded">
       <div class="row g-3">
+        
         <div class="col-md-6">
-          <label for="rut" class="form-label">RUT</label>
-          <input
-            type="text"
-            class="form-control"
-            id="rut"
-            inputmode="numeric"
-            pattern="^[0-9]+$"
-            required
-            aria-describedby="rutHelp"
-          >
-          <div id="rutHelp" class="form-text">Solo números, sin puntos ni guion.</div>
-          <div class="invalid-feedback">El RUT es obligatorio y debe contener solo números.</div>
+          <label for="rut" class="form-label">RUT *</label>
+          <input type="text" class="form-control" id="rut" required>
+          <div id="errorRut" class="error">El RUT solo debe contener números.</div>
         </div>
 
         <div class="col-md-6">
-          <label for="nombres" class="form-label">Nombres</label>
+          <label for="nombres" class="form-label">Nombres *</label>
           <input type="text" class="form-control" id="nombres" required>
-          <div class="invalid-feedback">Ingrese los nombres.</div>
         </div>
 
         <div class="col-md-6">
-          <label for="apellidos" class="form-label">Apellidos</label>
+          <label for="apellidos" class="form-label">Apellidos *</label>
           <input type="text" class="form-control" id="apellidos" required>
-          <div class="invalid-feedback">Ingrese los apellidos.</div>
         </div>
 
         <div class="col-md-6">
-          <label for="direccion" class="form-label">Dirección</label>
+          <label for="direccion" class="form-label">Dirección *</label>
           <input type="text" class="form-control" id="direccion" required>
-          <div class="invalid-feedback">Ingrese la dirección.</div>
         </div>
 
-        <div class="col-md-6">
-          <label for="ciudad" class="form-label">Ciudad</label>
+        <div class="col-md-4">
+          <label for="ciudad" class="form-label">Ciudad *</label>
           <input type="text" class="form-control" id="ciudad" required>
-          <div class="invalid-feedback">Ingrese la ciudad.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="pais" class="form-label">País *</label>
+          <input type="text" class="form-control" id="pais" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="telefono" class="form-label">Teléfono *</label>
+          <input type="text" class="form-control" id="telefono" required>
+          <div id="errorTelefono" class="error">El teléfono solo debe contener números.</div>
         </div>
 
         <div class="col-md-6">
-          <label for="pais" class="form-label">País</label>
-          <select id="pais" class="form-select" required>
+          <label for="correo" class="form-label">Correo Electrónico *</label>
+          <input type="email" class="form-control" id="correo" required>
+        </div>
+
+        <div class="col-md-6">
+          <label for="fecha" class="form-label">Fecha de Nacimiento *</label>
+          <input type="date" class="form-control" id="fecha" required>
+        </div>
+
+        <div class="col-md-6">
+          <label for="estado" class="form-label">Estado Civil *</label>
+          <select class="form-select" id="estado" required>
             <option value="">Seleccione...</option>
-            <option selected>Chile</option>
-            <option>Argentina</option>
-            <option>Perú</option>
-            <option>Bolivia</option>
-            <option>Otro</option>
+            <option>Soltero(a)</option>
+            <option>Casado(a)</option>
+            <option>Viudo(a)</option>
+            <option>Divorciado(a)</option>
           </select>
-          <div class="invalid-feedback">Seleccione el país.</div>
         </div>
 
-        <div class="col-md-6">
-          <label for="telefono" class="form-label">Teléfono</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="telefono"
-            inputmode="numeric"
-            pattern="^[0-9]+$"
-            required
-            aria-describedby="telHelp"
-          >
-          <div id="telHelp" class="form-text">Solo números (sin espacios ni signos).</div>
-          <div class="invalid-feedback">El teléfono es obligatorio y debe contener solo números.</div>
-        </div>
-
-        <div class="col-md-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" required>
-          <div class="invalid-feedback">Ingrese un email válido.</div>
-        </div>
-
-        <div class="col-md-6">
-          <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
-          <input type="date" class="form-control" id="fechaNac" required>
-          <div class="invalid-feedback">Seleccione la fecha de nacimiento.</div>
-        </div>
-
-        <div class="col-md-6">
-          <label for="estadoCivil" class="form-label">Estado Civil</label>
-          <select class="form-select" id="estadoCivil" required>
-            <option value="">Seleccione...</option>
-            <option>Soltero</option>
-            <option>Casado</option>
-            <option>Divorciado</option>
-            <option>Viudo</option>
-          </select>
-          <div class="invalid-feedback">Seleccione el estado civil.</div>
-        </div>
-
-        <div class="col-12">
+        <div class="col-md-12">
           <label for="comentarios" class="form-label">Comentarios</label>
-          <textarea class="form-control" id="comentarios" rows="3" required></textarea>
-          <div class="invalid-feedback">Ingrese un comentario.</div>
+          <textarea class="form-control" id="comentarios" rows="3"></textarea>
         </div>
       </div>
 
       <!-- Botones centrados -->
       <div class="text-center mt-4">
-        <button type="button" class="btn btn-success me-2" onclick="guardar()">Guardar</button>
-        <button type="reset" class="btn btn-danger me-2" id="btnLimpiar">Limpiar</button>
-        <button type="button" class="btn btn-secondary" onclick="cerrar()">Cerrar</button>
+        <button type="submit" class="btn btn-success me-2">Guardar</button>
+        <button type="reset" class="btn btn-warning me-2">Limpiar</button>
+        <button type="button" class="btn btn-danger" onclick="window.close()">Cerrar</button>
       </div>
     </form>
-
-    <!-- Buscar -->
-    <div class="card shadow p-4 mt-4">
-      <h4>Buscar por Apellido</h4>
-      <div class="input-group">
-        <input type="text" id="buscarApellido" class="form-control" placeholder="Ingrese apellido">
-        <button class="btn btn-primary" onclick="buscar()">Buscar</button>
-      </div>
-      <ul id="listaResultados" class="list-group mt-3"></ul>
-    </div>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Validaciones JS -->
   <script>
-    // Almacenamiento simple en memoria
-    let registros = {};
+    const rutInput = document.getElementById('rut');
+    const telInput = document.getElementById('telefono');
+    const errorRut = document.getElementById('errorRut');
+    const errorTel = document.getElementById('errorTelefono');
 
-    // Restringe a dígitos
-    function restringirSoloDigitos(id) {
-      const el = document.getElementById(id);
-      el.addEventListener('input', () => {
-        // elimina todo lo que no sea dígito
-        el.value = el.value.replace(/\D/g, '');
-        // limpia mensajes personalizados si el patrón ahora coincide
-        if (el.validity.patternMismatch === false) el.setCustomValidity('');
-      });
-      el.addEventListener('invalid', () => {
-        if (el.validity.valueMissing) {
-          el.setCustomValidity('Este campo es obligatorio.');
-        } else if (el.validity.patternMismatch) {
-          el.setCustomValidity('Ingrese solo números.');
-        }
-      });
-      el.addEventListener('input', () => el.setCustomValidity(''));
-    }
-
-    restringirSoloDigitos('rut');
-    restringirSoloDigitos('telefono');
-
-    // Bootstrap: mostrar validaciones
-    function validarFormulario() {
-      const form = document.getElementById('fichaForm');
-      if (!form.checkValidity()) {
-        form.classList.add('was-validated');
-        return false;
+    // Validar que solo se ingresen números en RUT
+    rutInput.addEventListener('input', function() {
+      if (/[^0-9]/.test(this.value)) {
+        errorRut.style.display = 'block';
+      } else {
+        errorRut.style.display = 'none';
       }
-      return true;
-    }
-
-    function limpiarValidacion() {
-      const form = document.getElementById('fichaForm');
-      form.classList.remove('was-validated');
-    }
-
-    document.getElementById('btnLimpiar').addEventListener('click', () => {
-      limpiarValidacion();
-      document.getElementById('listaResultados').innerHTML = '';
     });
 
-    function guardar() {
-      if (!validarFormulario()) return;
-
-      const rut = document.getElementById('rut').value.trim();
-      const data = {
-        rut: rut,
-        nombres: document.getElementById('nombres').value.trim(),
-        apellidos: document.getElementById('apellidos').value.trim(),
-        direccion: document.getElementById('direccion').value.trim(),
-        ciudad: document.getElementById('ciudad').value.trim(),
-        pais: document.getElementById('pais').value,
-        telefono: document.getElementById('telefono').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        fechaNac: document.getElementById('fechaNac').value,
-        estadoCivil: document.getElementById('estadoCivil').value,
-        comentarios: document.getElementById('comentarios').value.trim()
-      };
-
-      if (registros[rut]) {
-        if (confirm('El RUT ya existe, ¿desea sobrescribirlo?')) {
-          registros[rut] = data;
-          alert('Registro actualizado correctamente.');
-        }
+    // Validar que solo se ingresen números en Teléfono
+    telInput.addEventListener('input', function() {
+      if (/[^0-9]/.test(this.value)) {
+        errorTel.style.display = 'block';
       } else {
-        registros[rut] = data;
-        alert('Registro guardado correctamente.');
+        errorTel.style.display = 'none';
       }
-    }
-
-    function buscar() {
-      const apellido = document.getElementById('buscarApellido').value.trim().toLowerCase();
-      const lista = document.getElementById('listaResultados');
-      lista.innerHTML = '';
-
-      let encontrados = 0;
-      for (const rut in registros) {
-        if (registros[rut].apellidos.toLowerCase().includes(apellido)) {
-          const li = document.createElement('li');
-          li.className = 'list-group-item';
-          li.textContent = `${registros[rut].nombres} ${registros[rut].apellidos} (${rut}) — ${registros[rut].ciudad}, ${registros[rut].pais}`;
-          lista.appendChild(li);
-          encontrados++;
-        }
-      }
-      if (!encontrados) {
-        const li = document.createElement('li');
-        li.className = 'list-group-item text-muted';
-        li.textContent = 'No se encontraron resultados.';
-        lista.appendChild(li);
-      }
-    }
-
-    function cerrar() {
-      if (confirm('¿Desea cerrar la aplicación?')) {
-        window.close();
-      }
-    }
+    });
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
